@@ -92,3 +92,6 @@ string solution(string new_id) {
     
     return answer;
 }
+
+//for each문을 좀 더 활용해보자
+//char형에 접근해보자

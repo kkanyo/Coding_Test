@@ -1,9 +1,8 @@
-# 코딩테스트 연습
+# Practice for coding-test
 
-각종 코딩테스트 연습 사이트에서 풀이한 문제의 답을 커밋하고 있습니다.
+I commit here solved problem at coding-test site.
 
-제 방식의 풀이이기 때문에 정답일수도 아닐수도 있습니다.
+**These codes may not be the perfect answer!**
 
-혹시 수정할 사항이 있거나 더 좋은 풀이가 있을 경우 공유해주시면 정말 감사하겠습니다!
+If you have better answer and share that, I appreciated for.
 
-프로그래머스: https://programmers.co.kr/learn/challenges
