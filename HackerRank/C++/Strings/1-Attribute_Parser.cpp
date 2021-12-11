@@ -1,98 +1,125 @@
 #include <cmath>
 #include <cstdio>
-#include <cstring>
 #include <vector>
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
 int main() {
-    const int MAX_CHAR = 200;
-    
     int num_of_lines, num_of_queries;
-    vector<vector<string>> hrml = {};
-    vector<string> tmp;
     
     //for input
     string strinput;
-    string strtmp = "";
-    
+    vector<string> vectmp;
+
     scanf("%d %d\n", &num_of_lines, &num_of_queries);
     
-    //hrml.assign(num_of_lines, tmp);
+    vector<vector<string>> hrml(num_of_lines/2);
+    vector<string> tag;
     
+    int hrml_index = 0;
+
     //input and parse HRML 
     for (int i = 0; i < num_of_lines; i++) {
-        //공백무시하고 scanf로 통일해보자
+        string strtmp = "";
+        
         getline(cin, strinput);
         
+        int strinput_size = strinput.size();
+        
         //parsing
-        //역순으로 먼저 /tag-name 입력받고
-        //입력받은 tag를 기준으로 속성과 분리해서 속성만 따로 받아야 됨
-        for (int j = 1; j < MAX_CHAR; j++) {
-            if (strinput[j] == ' ' || strinput[j] == '"') {
-                tmp.push_back(strtmp);
-                
+        for (int j = 1; j < strinput_size; j++) {
+            //for </tag>
+            if (strinput[j] == '/')
+            {
+                j += 1;
+                while (j < strinput_size - 1) {
+                    strtmp += strinput[j++];
+                }
+                tag.push_back(strtmp);
+                break;
+            }
+            else if (strinput[j] == ' ' || strinput[j] == '"') {
+                hrml[hrml_index].push_back(strtmp);
                 strtmp = "";
             }
             else if (strinput[j] == '=') {
                 j += 2;
             }
-            else if (strinput[j] == '>') {
-                strtmp = "";
-                break;
+            else {
+                strtmp += strinput[j];
             }
-            else if (strinput[j] == '/') {
-                continue;
+        }
+        hrml_index += 1;
+    }
+    /*
+    for (int i = 0; i < num_of_lines/2; i++) {
+        cout << tag[i] << endl;
+    }
+    
+    for (int i = 0; i < num_of_lines/2; i++) {
+        for (int j = 0; j < hrml[i].size(); j++) {
+            cout << hrml[i][j] << endl;
+        }
+    }
+    */
+    
+    //query input
+    for (int i = 0; i < num_of_queries; i++) {
+        string strtmp = "";
+        vector<string> query;
+        
+        getline(cin, strinput);
+        
+        int strinput_size = strinput.size();
+        
+        //parse query
+        for (int j = 0; j < strinput_size; j++) {
+            if (strinput[j] == '.') {
+                query.push_back(strtmp);
+                strtmp = "";
+            }
+            else if (strinput[j] == '~') {
+                query.push_back(strtmp);
+                strtmp = "";
+                
+                while (j < strinput_size - 1) {
+                    strtmp += strinput[++j];
+                }
+                
+                query.push_back(strtmp);
             }
             else {
                 strtmp += strinput[j];
             }
         }
         
-        hrml.push_back(tmp);
-    }
-    
-    //query input
-    for (int i = 0; i < num_of_queries; i++) {
-        getline(cin, strinput);
+        int t = tag.size() - 1;
         
-        int n = 0;
-        int m = 1;
+        //compare tag
+        for (int j = 0; j < query.size() - 2; j++) {
+            for (; t > 0; t--) {
+                if (query[j] != tag[t]) {
+                    printf("Not Found!\n");
+                    break;
+                }
+            }
+        }
         
-        //parse query
-        for (int j = 0; j < MAX_CHAR; j++) {
-            //hrml 방문 순서 수정 필요
-            if (strinput[j] == '.' || strinput[j] == '~') {
-                while (strtmp != hrml[n][0] && n < num_of_lines/2) {
-                    n++;
+        int select_hrml;
+
+        //matching tag to hrml
+        for (int j = 0; j < num_of_lines/2; j++) {
+            if (hrml[j][0] == tag[t]) {
+                for (int k = 1; k < hrml[j].size() - 1; k += 1) {
+                    if (hrml[j][k].compare(query[query.size() - 1]) == 0) {
+                        cout << hrml[j][k + 1] << endl;
+                        break;
+                    }
+                    else {
+                        printf("Not Found!\n");
+                    }
                 }
-                
-                if (n >= num_of_lines/1) { 
-                    printf("Not Found!\n");
-                }
-                
-                strtmp = "";
-            }
-            else if (strinput[j] == 0) {
-                int size = hrml[n].size();
-                
-                while (strtmp != hrml[n][m] && m < size - 1) {
-                    m++;
-                }
-                
-                if (m >= size) { 
-                    printf("Not Found!\n");
-                }
-                else {
-                    cout << hrml[n][m+1] << endl;
-                }
-                
-                strtmp = "";
-                break;
-            }
-            else {
-                strtmp += strinput[j];
             }
         }
     }
@@ -101,6 +128,7 @@ int main() {
 }
 
 /*
-문자열을 입력받을 때 공백을 무시하고 받고 
-HRML 닫는 명령문을 활용해서 tag랑 속성 분리해보면 해결할 수 있을듯
+Incorrect....
+
+Next time I'll try using a struct or class.
 */
