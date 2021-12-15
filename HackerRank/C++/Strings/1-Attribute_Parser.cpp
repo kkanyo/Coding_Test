@@ -5,65 +5,81 @@
 #include <algorithm>
 using namespace std;
 
+/*
+This time Let's use tree structure...
+It's sooooo hard problem for me :(
+but do not give up
+*/
+struct hrml {
+    string tag;
+    vector<string> attributes;
+    vector<string> values;
+};
+
+struct tree_node {
+    struct hrml node;
+    vector<struct tree_node*> children;
+    struct tree_node* parent;
+};
+
 int main() {
     int num_of_lines, num_of_queries;
+    struct tree_node* root = new struct tree_node;
+    struct tree_node* now_level = root;
     
-    //for input
     string strinput;
-    vector<string> vectmp;
-
+    
     scanf("%d %d\n", &num_of_lines, &num_of_queries);
-    
-    vector<vector<string>> hrml(num_of_lines/2);
-    vector<string> tag;
-    
-    int hrml_index = 0;
 
     //input and parse HRML 
     for (int i = 0; i < num_of_lines; i++) {
         string strtmp = "";
         
         getline(cin, strinput);
+        cin.ignore();
         
         int strinput_size = strinput.size();
         
         //parsing
         for (int j = 1; j < strinput_size; j++) {
-            //for </tag>
+            //for end tag
             if (strinput[j] == '/')
             {
                 j += 1;
                 while (j < strinput_size - 1) {
-                    strtmp += strinput[j++];
+                    strtmp += strinput[j];
                 }
-                tag.push_back(strtmp);
-                break;
-            }
-            else if (strinput[j] == ' ' || strinput[j] == '"') {
-                hrml[hrml_index].push_back(strtmp);
-                strtmp = "";
-            }
-            else if (strinput[j] == '=') {
-                j += 2;
+                now_level->node.tag = strtmp;
+                now_level = now_level->parent;
             }
             else {
-                strtmp += strinput[j];
+                struct tree_node* new_node = new struct tree_node;
+                
+                if (strinput[j] == ' ') {
+                    new_node->node.attributes.push_back(strtmp);
+                    strtmp = "";
+                }
+                else if (strinput[j] == '=') {
+                    j += 2;
+                }
+                else if (strinput[j] == '\"') {
+                    new_node->node.attributes.push_back(strtmp);
+                    strtmp = "";
+                }
+                else if (strinput[j] == '>') {
+                    break;
+                }
+                else {
+                    strtmp += strinput[j];
+                }
+                
+                now_level->children.push_back(new_node);
+                now_level = new_node;
             }
         }
-        hrml_index += 1;
     }
+    
     /*
-    for (int i = 0; i < num_of_lines/2; i++) {
-        cout << tag[i] << endl;
-    }
-    
-    for (int i = 0; i < num_of_lines/2; i++) {
-        for (int j = 0; j < hrml[i].size(); j++) {
-            cout << hrml[i][j] << endl;
-        }
-    }
-    */
-    
     //query input
     for (int i = 0; i < num_of_queries; i++) {
         string strtmp = "";
@@ -123,12 +139,6 @@ int main() {
             }
         }
     }
-    
+    */
     return 0;
 }
-
-/*
-Incorrect....
-
-Next time I'll try using a struct or class.
-*/
