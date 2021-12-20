@@ -7,8 +7,12 @@ using namespace std;
 
 # What I learned
 map<key, value> name; (STL)
-Need to read the problem well before solving any problem.
 
+Need to read the problem well before solving any problem.
+If you do not use all the information provided in the desctiprion properly, your code will be messy.
+
+In this problem, big hint given is 'All tag names are unique and the HRML source program is logically correct'.
+this mean you don't have to do most of hard-work.
 */
 
 map <string, string> tagMap;
