@@ -1,10 +1,9 @@
-/*
-When the data type of operand is different from that of the result, you need to do type conversion.
-*/
 #include<bits/stdc++.h>
 
 using namespace std;
 
+//When the data type of operand is different from that of the result, you need to do type conversion.
+//Only edit here
 class Box {
     private:
         int l, b, h;
@@ -38,7 +37,7 @@ class Box {
             return os;
         }
 };
-
+//---------------
 
 void check2()
 {
