@@ -5,18 +5,28 @@
 using namespace std;
 
 //Only Edit here
-//This doesn't look good.
-stringstream ss;
-
 class BadLengthException : public exception {
+    private:
+        string errstr;
+        /*
+        stringstream ss;
+        -> Compile error [1]
+        */
     public:
         BadLengthException(int n) {
+            stringstream ss;
             ss << n;
+            errstr = ss.str();
         }
-        const char * what() const noexcept override {
-            cout << ss.str();
-            ss.str("");
-            return "";
+        const char * what() const noexcept {
+            return errstr.c_str();
+            /*
+            stringstream ss;
+            ss << errnum;
+
+            return ss.c_str()
+            -> This is dangerous! [2]
+            */
         }
 };
 //-------------------
