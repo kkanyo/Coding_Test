@@ -28,46 +28,57 @@ class Cache{
 
 };
 
-//Only Edit Here
-//-----------------------------------------------
 class LRUCache : public Cache{
     public:
-        LRUCache(int num) { cp = num; }
-        void set(int key, int val) {
+        LRUCache(int c) { this->cp = c; }
+        void set(int k, int val) {
+            Node* new_node = new Node(k, val);
             
-            if (mp.count(key) > 0) {    //If already have that key
-                mp.find(key)->second->value = val;
-            }
-            else {
-                Node* new_node = new Node(key, val);
-                
-                if (head == NULL) {
+            if (head == NULL) {
                 head = new_node;
                 tail = new_node;
-                }
-                else {
-                    head->prev = new_node;
-                    new_node->next = head;
-                    head = new_node;
-                    if (mp.size() >= cp) {
-                        mp.erase(tail->key);
-                        Node* tmp = tail->prev;
-                        delete(tail);
-                        tail = tmp;
-                    }
-                    
-                }
-                mp.insert(make_pair(key, new_node));
             }
-        }
-        int get(int num) {
-            if (mp.count(num)) return mp.find(num)->second->value;
-            else return -1;
+            else {
+                head->prev = new_node;
+                new_node->next = head;
+                head = new_node;
+            }
             
+            if (mp.count(k) > 0) {    //If already have that key             
+                mp[k]->value = val;
+                MoveToHead(mp[k]);
+                
+                return;       
+            }
+            
+            if (mp.size() >= cp) {      //If map is fulled
+                mp.erase(tail->key);
+                
+                Node* tmp = tail;   //delete tail
+                tail = tail->prev;
+                delete(tmp);
+                tail->next = NULL;
+            }
+            mp.insert(make_pair(k, new_node));
         }
-        
+        int get(int k) {
+            if (mp.count(k) > 0) { 
+                MoveToHead(mp[k]);
+                
+                return mp[k]->value; 
+            }
+            else { return -1; }
+        }
+    private:
+        void MoveToHead(Node* node) {
+            head->prev = node;
+            if (node->prev) { node->prev->next = node->next; }
+            if (node->next) { node->next->prev = node->prev; }
+            node->prev = NULL;
+            node->next = head;
+            head = node;
+        }
 };
-//-----------------------------------------------
 
 int main() {
    int n, capacity,i;
