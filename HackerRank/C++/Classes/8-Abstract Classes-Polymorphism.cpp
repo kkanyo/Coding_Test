@@ -28,6 +28,8 @@ class Cache{
 
 };
 
+//Only Edit Here
+//----------------------------------------------------------
 class LRUCache : public Cache{
     public:
         LRUCache(int c) { this->cp = c; }
@@ -79,6 +81,7 @@ class LRUCache : public Cache{
             head = node;
         }
 };
+//----------------------------------------------------------
 
 int main() {
    int n, capacity,i;
