@@ -5,24 +5,29 @@ using namespace std;
 void printKMax(int arr[], int n, int k){
 	//Write your code here.
     deque<int> subArr;
-    int numSubArr = n-k+1;
-    int max = 0;
-    int i = 0;
+    int max = arr[0];
+    int i = 0;      //start point of subarray on 'arr'
     
-    while (i < k-1) {
+    while (i < k) {                             //create first 'subArr' and search maximum integer
+        if (arr[i] > max) { max = arr[i]; }
         subArr.push_back(arr[i++]);
     }
+    cout << max << " ";
     
-    while (i < n) {
+    while (i < n) {                     //move range of 'subArr'
+        int head = subArr[0];           //save integer taht will go out of range
         subArr.push_back(arr[i++]);
-
-        for (auto j : subArr) {         //O(n^2), Not effective
-            if (j > max) { max = j; }
-        }
-        cout << max << " ";
-        
-        max = 0;
         subArr.pop_front();
+
+        if (subArr[k-1] > max) { max = subArr[k-1]; }   //update 'max'
+
+        if (head == max) {                  //If integer out of range is same to 'max'
+            max = subArr[0];                //initialize 'max'
+            for (auto j : subArr) {         //re-search maximum integer
+                if (j > max) { max = j; }
+            }
+        }
+        cout << max << " ";   
     }
     cout << "\n";
 }
