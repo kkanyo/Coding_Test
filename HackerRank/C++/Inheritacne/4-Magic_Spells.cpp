@@ -63,7 +63,7 @@ string SpellJournal::journal = "";
 void counterspell(Spell *spell) {
 
 /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-    if ( Fireball* pSpell = dynamic_cast<Fireball*>(spell) ) {
+    if ( Fireball* pSpell = dynamic_cast<Fireball*>(spell) ) {  // downcast
         pSpell->revealFirepower();
     }
     else if ( Frostbite* pSpell = dynamic_cast<Frostbite*>(spell) ) {
@@ -75,7 +75,8 @@ void counterspell(Spell *spell) {
     else if ( Waterbolt* pSpell = dynamic_cast<Waterbolt*>(spell) ) {
         pSpell->revealWaterpower();
     }
-    else {
+    else {  // For generic spells
+        // find the longest common subsequence using dynamic programming
         string scrollName_ = spell->revealScrollName();
         string journal_ = SpellJournal::read();
         long long scrollNameSize = scrollName_.size();

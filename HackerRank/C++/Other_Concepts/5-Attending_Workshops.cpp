@@ -33,7 +33,7 @@ int CalculateMaxWorkshops(Available_Workshops* ptr) {
     int result = 0;
     
     for (int i=0; i < (ptr->n)-1; i++) {    // sort by endTime
-        for (int j=i+1; j < ptr->n; j++) {
+        for (int j=i+1; j < ptr->n; j++) {  // Earliest end time first
             struct Workshop tmp;
             if (ptr->arrWs[i].endTime > ptr->arrWs[j].endTime) {
                 tmp = ptr->arrWs[i];
@@ -43,8 +43,8 @@ int CalculateMaxWorkshops(Available_Workshops* ptr) {
         }
     }
     
-    for (int i=0; i < ptr->n; i++) {
-        if (currentTime <= ptr->arrWs[i].startTime) {
+    for (int i=0; i < ptr->n; i++) {    
+        if (currentTime <= ptr->arrWs[i].startTime) {   //pass the workshop already start
             currentTime = ptr->arrWs[i].endTime;
             result++;
         }
