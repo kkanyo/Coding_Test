@@ -11,14 +11,15 @@ int p_id = 0;   //professor id
 int s_id = 0;   //student id
 
 class Person {
-    public:
+    private:
         string name;
         int age;
+    public:
         virtual void getdata() {
             cin >> name >> age;
         }
         virtual void putdata() {
-            cout << name << " " << age << endl;
+            cout << name << " " << age;
         }
 };
 
@@ -29,10 +30,12 @@ class Professor : public Person{
     public:
         Professor() { cur_id = ++p_id; }
         void getdata () {
-            cin >> name >> age >> publications;
+            Person::getdata();
+            cin >> publications;
         }
         void putdata() {
-            cout << name << " " << age << " " << publications << " " << cur_id << endl;
+            Person::putdata();
+            cout << " " << publications << " " << cur_id << '\n';
         }
 };
 
@@ -43,7 +46,7 @@ class Student : public Person{
     public:
         Student() { cur_id = ++s_id; }
         void getdata() {
-            cin >> name >> age;
+            Person::getdata();
             for (int i = 0; i < 6; i++) {
                 cin >> marks[i];
             }
@@ -53,7 +56,8 @@ class Student : public Person{
             for (int i = 0; i < 6; i++) {
                 sum_marks += marks[i];
             }
-            cout << name << " " << age << " " << sum_marks << " " << cur_id << endl;
+            Person::putdata();
+            cout << " " << sum_marks << " " << cur_id << '\n';
         }
 };
 //--------------------------------------
