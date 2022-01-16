@@ -14,8 +14,8 @@ public:
     const string& get_text() {
         return text_;
     }
-    friend bool operator<(Message msg1, Message msg2) {     //Overload operator< function
-        if (msg1.order_ < msg2.order_) return true;         //Compare the order of message with another one.
+    bool operator<(const Message &msg2) {     //Overload operator< function
+        if (this->order_ < msg2.order_) return true;         //Compare the order of message with another one.
         else return false;
     }
 private:
