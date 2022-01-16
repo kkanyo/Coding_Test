@@ -102,7 +102,10 @@ class D : A, B, C
 void D::check(int new_val)
 {
     update_val(new_val);
-    cout << "Value = " << val << endl << "A's func called " << getA() << " times " << endl << "B's func called " << getB() << " times" << endl << "C's func called " << getC() << " times" << endl;
+    cout << "Value = " << val << endl << 
+        "A's func called " << getA() << " times " << endl << 
+        "B's func called " << getB() << " times" << endl << 
+        "C's func called " << getC() << " times" << endl;
 }
 
 
