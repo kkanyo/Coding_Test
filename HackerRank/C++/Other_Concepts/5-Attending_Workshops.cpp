@@ -2,8 +2,6 @@
 
 using namespace std;
 
-#include<algorithm>
-
 //Define the structs Workshops and Available_Workshops.
 //Implement the functions initialize and CalculateMaxWorkshops
 struct Workshop {
@@ -21,12 +19,16 @@ public:
 struct Available_Workshops {
     int n;                  // The number of workshops
     Workshop* arrWs; // Array of Workshop
+    Available_Workshops(int n) {    // Initialize members
+        this->n = n;
+        arrWs = new Workshop[n];    //dynamic allocate a new array with size 'n'
+    }
+    ~Available_Workshops() { delete arrWs; }    //unallocate dynamic memory assigned to 'arrWs'
 };
 
 // Initializes its elements
 Available_Workshops* initialize(int start_time[], int duration[], int n) {
-    Available_Workshops* result = new Available_Workshops;
-    *result = {n, new Workshop[n]};
+    Available_Workshops* result = new Available_Workshops(n);
     
     for(int i=0; i<n; i++) {
         result->arrWs[i].startTime = start_time[i];
@@ -48,7 +50,7 @@ int CalculateMaxWorkshops(Available_Workshops* ptr) {
     * Fast end time of workshop mean
     * its start time is fast and duration is short.
     * So, need to sort by end time.
-    * (Task scheduling, earliest finish time first)
+    * (Interval scheduling)
     */
     sort(ptr->arrWs, ptr->arrWs+ptr->n);
     
