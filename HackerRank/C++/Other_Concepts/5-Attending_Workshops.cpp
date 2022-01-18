@@ -2,50 +2,59 @@
 
 using namespace std;
 
+#include<algorithm>
+
 //Define the structs Workshops and Available_Workshops.
 //Implement the functions initialize and CalculateMaxWorkshops
 struct Workshop {
     int startTime;
     int duration;
     int endTime;
+public:
+    // Overloading operator '<' for sorting by end time.
+    bool operator<(Workshop ws2) {
+        if (this->endTime < ws2.endTime) { return true; }
+        else return false;
+    }
 };
 
 struct Available_Workshops {
-    int n;
-    struct Workshop* arrWs;
+    int n;                  // The number of workshops
+    Workshop* arrWs; // Array of Workshop
 };
 
+// Initializes its elements
 Available_Workshops* initialize(int start_time[], int duration[], int n) {
-    static struct Available_Workshops result = {n, new struct Workshop[n]};
+    Available_Workshops* result = new Available_Workshops;
+    *result = {n, new Workshop[n]};
     
     for(int i=0; i<n; i++) {
-        result.arrWs[i].startTime = start_time[i];
-        result.arrWs[i].duration = duration[i];
-        result.arrWs[i].endTime = start_time[i] + duration[i];
+        result->arrWs[i].startTime = start_time[i];
+        result->arrWs[i].duration = duration[i];
+        result->arrWs[i].endTime = start_time[i] + duration[i];
     }
     
-    return &result;
+    return result;
 }
 
-// need to optimize
+
+
+// Returns the maximum number of workshops the student can attend without overlap
 int CalculateMaxWorkshops(Available_Workshops* ptr) {
     int currentTime = 0;
     int result = 0;
     
-    for (int i=0; i < (ptr->n)-1; i++) {    // sort by endTime
-        for (int j=i+1; j < ptr->n; j++) {  // Earliest end time first
-            struct Workshop tmp;
-            if (ptr->arrWs[i].endTime > ptr->arrWs[j].endTime) {
-                tmp = ptr->arrWs[i];
-                ptr->arrWs[i] = ptr->arrWs[j];
-                ptr->arrWs[j] = tmp;
-            }
-        }
-    }
+    /*
+    * Fast end time of workshop mean
+    * its start time is fast and duration is short.
+    * So, need to sort by end time.
+    * (Task scheduling, earliest finish time first)
+    */
+    sort(ptr->arrWs, ptr->arrWs+ptr->n);
     
-    for (int i=0; i < ptr->n; i++) {    
-        if (currentTime <= ptr->arrWs[i].startTime) {   //pass the workshop already start
-            currentTime = ptr->arrWs[i].endTime;
+    for (int i=0; i < ptr->n; i++) {
+        if (currentTime <= ptr->arrWs[i].startTime) {   // Pass the workshop already start
+            currentTime = ptr->arrWs[i].endTime;        // Upadate 'currentTime' to end time of workshop attended
             result++;
         }
     }
@@ -53,7 +62,6 @@ int CalculateMaxWorkshops(Available_Workshops* ptr) {
     return result;
 }
 
-// Fixed
 int main(int argc, char *argv[]) {
     int n; // number of workshops
     cin >> n;
