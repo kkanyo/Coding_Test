@@ -8,7 +8,6 @@ struct Workshop {
     int startTime;
     int duration;
     int endTime;
-public:
     // Overloading operator '<' for sorting by end time.
     bool operator<(Workshop ws2) {
         if (this->endTime < ws2.endTime) { return true; }
