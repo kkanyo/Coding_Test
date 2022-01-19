@@ -8,12 +8,13 @@ struct Workshop {
     int startTime;
     int duration;
     int endTime;
-    // Overloading operator '<' for sorting by end time.
-    bool operator<(Workshop ws2) {
-        if (this->endTime < ws2.endTime) { return true; }
-        else return false;
-    }
 };
+
+// Overloading operator '<' for sorting by end time.
+bool operator<(Workshop ws1, Workshop ws2) {
+    if (ws1.endTime < ws2.endTime) { return true; }
+    else return false;
+}
 
 struct Available_Workshops {
     int n;                  // The number of workshops
@@ -37,8 +38,6 @@ Available_Workshops* initialize(int start_time[], int duration[], int n) {
     
     return result;
 }
-
-
 
 // Returns the maximum number of workshops the student can attend without overlap
 int CalculateMaxWorkshops(Available_Workshops* ptr) {
