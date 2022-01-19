@@ -17,7 +17,7 @@ int birthdayCakeCandles(vector<int> candles) {
     int result = 0;
     int maxHeight = candles[0];     //temporary max value
     
-    for (auto i : candles) {
+    for (auto& i : candles) {
         if (i > maxHeight) {        //If element is bigger than 'maxHeight',
             maxHeight = i;          //update 'maxHeight' to bigger value and initailize result
             result = 1;

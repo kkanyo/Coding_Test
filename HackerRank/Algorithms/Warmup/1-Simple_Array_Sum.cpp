@@ -16,7 +16,7 @@ vector<string> split(const string &);
 int simpleArraySum(vector<int> ar) {
     int result = 0;
     
-    for (auto i : ar) {     //roof vector ar
+    for (auto& i : ar) {     //roof vector ar
         result += i++;
     }
     

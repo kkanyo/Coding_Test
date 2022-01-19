@@ -16,7 +16,7 @@ vector<string> split(const string &);
 long aVeryBigSum(vector<long> ar) {
     long result = 0;
     
-    for (auto i : ar) {
+    for (auto& i : ar) {
         result += i++;
     }
     

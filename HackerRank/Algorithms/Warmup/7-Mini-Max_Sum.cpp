@@ -16,7 +16,7 @@ void miniMaxSum(vector<int> arr) {
     int min = arr[0], max = arr[0];
     long sumArr = 0;
     
-    for (auto i : arr) {
+    for (auto& i : arr) {
         sumArr += i;
         if (i < min) { min = i; }
         if (i > max) { max = i; }
