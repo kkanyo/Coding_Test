@@ -2,8 +2,27 @@
 
 using namespace std;
 
-//When the data type of operand is different from that of the result, you need to do type conversion.
-//Only edit here
+//Implement the class Box  
+//l,b,h are integers representing the dimensions of the box
+
+// The class should have the following functions : 
+
+// Constructors: 
+// Box();
+// Box(int,int,int);
+// Box(Box);
+
+
+// int getLength(); // Return box's length
+// int getBreadth (); // Return box's breadth
+// int getHeight ();  //Return box's height
+// long long CalculateVolume(); // Return the volume of the box
+
+//Overload operator < as specified
+//bool operator<(Box& b)
+
+//Overload operator << as specified
+//ostream& operator<<(ostream& out, Box& B)
 class Box {
     private:
         int l, b, h;
@@ -25,19 +44,20 @@ class Box {
             return result;
         }
         
-        //Overload
+        //Overload operator<
         bool operator<(Box& B) {
             if (l < B.l) { return true; }
             else if (l == B.l && b < B.b) { return true; }
             else if (l == B.l && b == B.b && h < B.h) { return true; }
             else { return false; }
         }
-        friend ostream& operator<<(ostream& os, Box& B) {
-            os << B.l << " " << B.b << " " << B.h;
-            return os;
-        }
 };
-//---------------
+
+// Overloading operator<< for Box
+ostream& operator<<(ostream& os, Box& B) {
+    os << B.getLength() << " " << B.getBreadth() << " " << B.getHeight();
+    return os;
+}
 
 void check2()
 {
