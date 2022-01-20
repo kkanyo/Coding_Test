@@ -11,6 +11,7 @@ public:
     virtual int get_price() {                   //cause: Add 'virtual' keyword
         return 50*bedrooms_ + 100*bathrooms_;
     }
+    virtual ~HotelRoom();
 private:
     int bedrooms_;
     int bathrooms_;

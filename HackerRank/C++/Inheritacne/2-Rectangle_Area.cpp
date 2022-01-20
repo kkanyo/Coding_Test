@@ -18,6 +18,7 @@ public:
     int get_height() {
         return height;
     }
+    virtual ~Rectangle();
 private:
     int width;
     int height;

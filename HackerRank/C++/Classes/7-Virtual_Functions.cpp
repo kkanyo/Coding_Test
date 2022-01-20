@@ -21,6 +21,7 @@ class Person {
         virtual void putdata() {
             cout << name << " " << age;
         }
+        virtual ~Person();
 };
 
 class Professor : public Person{
