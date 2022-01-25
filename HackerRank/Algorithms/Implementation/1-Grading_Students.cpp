@@ -15,7 +15,7 @@ string rtrim(const string &);
 vector<int> gradingStudents(vector<int> grades) {
     vector<int> result;
     
-    for(auto grade : grades) {
+    for(auto& grade : grades) {
         int remainder = grade%5;
         if (grade >= 35 && remainder >= 3) {    // If grade is upper to 35
             grade += (5-remainder);             // Round to Nearest 5
