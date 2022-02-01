@@ -6,14 +6,20 @@
  */
 
 bool cmp(string str1, string str2) {
-    return (int)str1.size() < (int)str2.size();
+    int len1 = str1.size();
+    int len2 = str2.size();
+    
+    // If digits are same, compare by string
+    if (len1 == len2) return str1 < str2;
+    
+    // If digits are different, compare by size of string
+    return len1 < len2;
 }
 
 vector<string> bigSorting(vector<string> unsorted) {
     vector<string> result = unsorted;
     
-    sort(result.begin(), result.end());         // Sort by string
-    sort(result.begin(), result.end(), cmp);    // Sort by size of string
+    sort(result.begin(), result.end(), cmp);    // Sort by 'cmp' function
     
     return result;
 }
