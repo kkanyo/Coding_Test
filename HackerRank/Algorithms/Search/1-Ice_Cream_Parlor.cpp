@@ -23,3 +23,27 @@ vector<int> icecreamParlor1(int m, vector<int> arr) {
     
     return result;
 }
+
+// Using map stl [O(N)]
+// We need to search "pair" to make sum result to 'm'
+vector<int> icecreamParlor(int m, vector<int> arr) {
+    vector<int> result;
+    map<int, int> log;
+    
+    for (int i = 0; i < arr.size(); i++) {
+        int first = arr[i];
+        int second = m - first;     // m = first + second
+        
+        int j = log[second];        // Get index of value 'second'
+        
+        if (j != 0) {               // If know index of value 'second'
+            result.push_back(j);
+            result.push_back(i+1);
+            break;
+        }
+                                    // If don't know index of value 'second',
+        log[first] = i+1;           // store index of value 'first'
+    }
+    
+    return result;
+}
