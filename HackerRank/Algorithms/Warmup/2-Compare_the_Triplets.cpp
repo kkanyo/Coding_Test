@@ -1,3 +1,5 @@
+#include <vector>
+
 /*
  * Complete the 'compareTriplets' function below.
  *
@@ -7,17 +9,24 @@
  *  2. INTEGER_ARRAY b
  */
 
-vector<int> compareTriplets(vector<int> a, vector<int> b) {
-    int scoreAlice = 0, scoreBob = 0;
-    vector<int> scores;
+std::vector<int> compareTriplets(std::vector<int> a, std::vector<int> b) {
+    // [0]: Alice's Score
+    // [1]: Bob's Score
+    std::vector<int> nvScore(2);
+    //std::vector<int> nvScore = {0, 0};
+
+    int i = 0;
+    int nNumRating = 3;
     
-    for (int i = 0; i < 3; i++) {
-        if (a[i] > b[i]) { scoreAlice++; }      //Alice is awarded
-        else if (a[i] < b[i]) { scoreBob++; }   //Bob is awarded
+    for (; i < nNumRating; i++)
+    {
+        if (a[i] > b[i])
+            nvScore[0]++;
+        else if (a[i] < b[i])
+            nvScore[1]++;
+        else
+            continue;
     }
     
-    scores.push_back(scoreAlice);       //push scores in vector
-    scores.push_back(scoreBob);
-    
-    return scores;
+    return nvScore;
 }
