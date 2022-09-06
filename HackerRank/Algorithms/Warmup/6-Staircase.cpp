@@ -1,3 +1,5 @@
+#include <iostream>
+
 /*
  * Complete the 'staircase' function below.
  *
@@ -5,11 +7,20 @@
  */
 
 void staircase(int n) {
-    for (int i = 0; i < n; i++) {
-        int j = 0;
-        int middle = n-i-1;
-        for (; j < middle; j++) { cout << ' '; }
-        for (; j < n; j++) { cout << '#'; }
-        cout << endl;
+    int row = 0;
+    
+    for (; row < n; row++)
+    {
+        int col = 0;
+        int mid = n - row - 1;
+        
+        for (; col < n; col++)
+        {
+            if ( col < mid )
+                printf(" ");
+            else
+                printf("#");
+        }
+        printf("\n");
     }
 }
