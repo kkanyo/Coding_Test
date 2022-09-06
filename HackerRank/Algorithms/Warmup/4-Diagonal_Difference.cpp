@@ -1,3 +1,5 @@
+#include <vector>
+
 /*
  * Complete the 'diagonalDifference' function below.
  *
@@ -5,16 +7,17 @@
  * The function accepts 2D_INTEGER_ARRAY arr as parameter.
  */
 
-int diagonalDifference(vector<vector<int>> arr) {
-    int result = 0;
-    int maxRow = arr[0].size();     //num of rows and columns is same
-    int col = maxRow-1;
+int diagonalDifference(std::vector<std::vector<int>> arr) {
+    int nDiagonalDiff = 0;
+    int i = 0;
+    int nNumCols = arr.size();
     
-    for (int row = 0; row < maxRow; row++, col--) {
-        result += arr[row][row];    //for primary diagonol
-        result -= arr[row][col];    //for secondary diagonol
+    // arr is square matrix
+    for (; i < nNumCols; i++)
+    {
+        nDiagonalDiff += arr[i][i];
+        nDiagonalDiff -= arr[i][nNumCols - i - 1];
     }
     
-    if (result < 0) { return result *= -1;}
-    else { return result; }
+    return nDiagonalDiff > 0 ? nDiagonalDiff : -nDiagonalDiff;
 }
