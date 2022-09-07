@@ -1,3 +1,5 @@
+#include <string>
+
 /*
  * Complete the 'kangaroo' function below.
  *
@@ -10,7 +12,7 @@
  */
 
 // Use loop
-string kangaroo(int x1, int v1, int x2, int v2) {
+std::string kangaroo(int x1, int v1, int x2, int v2) {
     // If jump degree of first kangaroo is shorter than second one
     // it cannot follow sceond one
     int _x1 = x1;   int _x2 = x2;
@@ -29,12 +31,14 @@ string kangaroo(int x1, int v1, int x2, int v2) {
 
 // O(1)
 // Not use loop
-string kangaroo(int x1, int v1, int x2, int v2) {
-    if (v1 <= v2) return "NO";
+// Those kangaroos only jump once at the same time.
+// So, the location diff is narrowed in proportion to diff of jump distance.        
+std::string kangaroo(int x1, int v1, int x2, int v2) {
+    int nDiffLocation = x2 - x1;
+    int nDiffJumpDist = v1 - v2;
     
-    int n_distance = x2 - x1;
-    int n_speed = v1 - v2;
+    if (nDiffJumpDist < 0) return "NO";
     
     // Remainder is not 0 means that kangaroo1 jump over kangaroo2
-    return (n_distance % n_speed == 0) ? "YES" : "NO"; 
+    return (nDiffLocation % nDiffJumpDist == 0) ? "YES" : "NO"; 
 }
