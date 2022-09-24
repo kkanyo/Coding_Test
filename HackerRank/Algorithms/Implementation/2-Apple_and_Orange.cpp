@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'countApplesAndOranges' function below.
  *
@@ -10,7 +12,7 @@
  *  6. INTEGER_ARRAY oranges
  */
 
-void countApplesAndOranges(int s, int t, int a, int b, vector<int> apples, vector<int> oranges) {
+void countApplesAndOranges(int s, int t, int a, int b, std::vector<int> apples, std::vector<int> oranges) {
     int numApples = 0, numOranges = 0;
     
     // Check position of apples
@@ -27,5 +29,5 @@ void countApplesAndOranges(int s, int t, int a, int b, vector<int> apples, vecto
         if (posOrange >= s && posOrange <=t) { numOranges++; }
     }
     
-    cout << numApples << "\n" << numOranges;
+    std::cout << numApples << "\n" << numOranges;
 }

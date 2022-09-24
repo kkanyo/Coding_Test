@@ -1,3 +1,6 @@
+#include "stdc++.h"
+#include <sstream>
+
 /*
  * Complete the 'timeConversion' function below.
  *
@@ -5,18 +8,18 @@
  * The function accepts STRING s as parameter.
  */
 
-string timeConversion(string s) {
-    string militaryTime;
+std::string timeConversion(std::string s) {
+    std::string militaryTime;
     
-    stringstream ss;
-    string strHour = s.substr(0, 2);    //split hours from 's'
+    std::stringstream ss;
+    std::string strHour = s.substr(0, 2);    //split hours from 's'
     ss.str(strHour);
     
     int hour;
     ss >> hour;     //convert string to integer
     
     if (s[8] == 'A' && hour == 12) { strHour = "00"; }                      //convert hour of AM/PM format to military format
-    else if (s[8] == 'P' && hour < 12) { strHour = to_string(hour+12); }
+    else if (s[8] == 'P' && hour < 12) { strHour = std::to_string(hour+12); }
     
     militaryTime = strHour + s.substr(2, 6);    //combine hour with minute and second
     

@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'introTutorial' function below.
  *
@@ -7,7 +9,7 @@
  *  2. INTEGER_ARRAY arr
  */
 
-int introTutorial(int V, vector<int> arr) {
+int introTutorial(int V, std::vector<int> arr) {
     int result = -1;
     
     sort(arr.begin(), arr.end());

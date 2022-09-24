@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'simpleArraySum' function below.
  *
@@ -5,7 +7,7 @@
  * The function accepts INTEGER_ARRAY ar as parameter.
  */
 
-int simpleArraySum(vector<int> ar) {
+int simpleArraySum(std::vector<int> ar) {
     int result = 0;
     
     for (auto& i : ar) {     //roof vector ar

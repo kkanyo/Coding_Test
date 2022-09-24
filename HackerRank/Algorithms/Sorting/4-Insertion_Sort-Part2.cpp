@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'insertionSort2' function below.
  *
@@ -7,14 +9,14 @@
  */
  
 // Print elements of vector
-void printArr(vector<int> arr) {
+void printArr(std::vector<int> arr) {
     for (auto &num : arr) {
-        cout << num << " ";
+        std::cout << num << " ";
     }
-    cout << "\n";
+    std::cout << "\n";
 }
 
-void insertionSort2(int n, vector<int> arr) {
+void insertionSort2(int n, std::vector<int> arr) {
     for (int i = 1; i < n; i++) {
         int tmp = arr[i];
         int j = i-1;    // prev

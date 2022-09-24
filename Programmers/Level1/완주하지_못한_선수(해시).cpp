@@ -1,6 +1,4 @@
-#include <string>
-#include <vector>
-#include <map>
+#include "stdc++.h"
 
 using namespace std;
 

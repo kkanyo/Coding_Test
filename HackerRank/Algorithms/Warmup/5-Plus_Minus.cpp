@@ -1,10 +1,12 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'plusMinus' function below.
  *
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-void plusMinus(vector<int> arr) {
+void plusMinus(std::vector<int> arr) {
     float plus = 0, minus = 0, zero = 0;
     int size = arr.size();
     
@@ -14,7 +16,7 @@ void plusMinus(vector<int> arr) {
         else { zero++; }
     }
     
-    cout << plus/size << endl;      //If all of operand are integer,
-    cout << minus/size << endl;     //you will convert data type to float or double
-    cout << zero/size << endl;
+    std::cout << plus/size << "\n";      //If all of operand are integer,
+    std::cout << minus/size << "\n";     //you will convert data type to float or double
+    std::cout << zero/size << "\n";
 }

@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'superReducedString' function below.
  *
@@ -5,8 +7,8 @@
  * The function accepts STRING s as parameter.
  */
 
-string superReducedString(string s) {
-    string result;
+std::string superReducedString(std::string s) {
+    std::string result;
     
     int i=0;
     while (i < s.size()-1 && !s.empty()) {

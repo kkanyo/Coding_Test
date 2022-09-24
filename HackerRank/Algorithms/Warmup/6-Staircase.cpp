@@ -1,4 +1,4 @@
-#include <iostream>
+#include "stdc++.h"
 
 /*
  * Complete the 'staircase' function below.

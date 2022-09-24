@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'balancedSums' function below.
  *
@@ -5,7 +7,7 @@
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-string balancedSums(vector<int> arr) {
+std::string balancedSums(std::vector<int> arr) {
     int size = arr.size();
     // If size of array is 1, answer is always "YES"
     if (size == 1) return "YES";
@@ -14,7 +16,7 @@ string balancedSums(vector<int> arr) {
     int right_sum = 0;  // Sum of element of right subarray
     
     for (auto &num : arr) {
-        right_sum += arr[i];
+        right_sum += num;
     }
     
     // Update 'left_sum' and 'right_sum' based on current element

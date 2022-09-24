@@ -1,4 +1,4 @@
-#include <vector>
+#include "stdc++.h"
 
 /*
  * Complete the 'gradingStudents' function below.

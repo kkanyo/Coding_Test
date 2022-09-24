@@ -1,5 +1,4 @@
-#include <vector>
-#include <algorithm>
+#include "stdc++.h"
 
 /*
  * Complete the 'getTotalX' function below.

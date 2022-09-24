@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'icecreamParlor' function below.
  *
@@ -8,8 +10,8 @@
  */
 
 // Brute Force [O(N^2)]
-vector<int> icecreamParlor1(int m, vector<int> arr) {
-    vector<int> result;
+std::vector<int> icecreamParlor1(int m, std::vector<int> arr) {
+    std::vector<int> result;
     
     for (int i = 0; i < arr.size(); i++) {
         for (int j = i+1; j < arr.size(); j++) {
@@ -26,9 +28,9 @@ vector<int> icecreamParlor1(int m, vector<int> arr) {
 
 // Using map stl [O(N)]
 // We need to search "pair" to make sum result to 'm'
-vector<int> icecreamParlor(int m, vector<int> arr) {
-    vector<int> result;
-    map<int, int> log;
+std::vector<int> icecreamParlor(int m, std::vector<int> arr) {
+    std::vector<int> result;
+    std::map<int, int> log;
     
     for (int i = 0; i < arr.size(); i++) {
         int first = arr[i];

@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'birthdayCakeCandles' function below.
  *
@@ -5,7 +7,7 @@
  * The function accepts INTEGER_ARRAY candles as parameter.
  */
 
-int birthdayCakeCandles(vector<int> candles) {
+int birthdayCakeCandles(std::vector<int> candles) {
     int result = 0;
     int maxHeight = candles[0];     //temporary max value
     

@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'minimumNumber' function below.
  *
@@ -7,11 +9,11 @@
  *  2. STRING password
  */
  
-int minimumNumber(int n, string password) {
+int minimumNumber(int n, std::string password) {
     // Return the minimum number of characters to make the password strong
     int result = 0;
     
-    string special_ch = "!@#$%^&*()-+";
+    std::string special_ch = "!@#$%^&*()-+";
     bool check[4] = {false,}; // 0:number, 1:lower case, 2:upper case, 3:special character
     
     for (auto& ch : password) {

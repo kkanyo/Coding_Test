@@ -1,3 +1,5 @@
+#include "stdc++.h"
+
 /*
  * Complete the 'missingNumbers' function below.
  *
@@ -8,9 +10,9 @@
  */
 
 // Using map [O(M+N+K) (K <= N <= M)]
-vector<int> missingNumbers(vector<int> arr, vector<int> brr) {
-    vector<int> result;
-    map<int, int> log;
+std::vector<int> missingNumbers(std::vector<int> arr, std::vector<int> brr) {
+    std::vector<int> result;
+    std::map<int, int> log;
     
     for (auto &num : brr) {     // Count frequency of each element
         log[num] += 1;

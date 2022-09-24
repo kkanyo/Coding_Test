@@ -1,4 +1,4 @@
-#include <string>
+#include "stdc++.h"
 
 /*
  * Complete the 'kangaroo' function below.

@@ -1,5 +1,5 @@
-#include <vector>
-#include <iostream>
+#include "stdc++.h"
+
 using namespace std;
 
 int solution(vector<int> nums) {
