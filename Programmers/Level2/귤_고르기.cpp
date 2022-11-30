@@ -34,3 +34,33 @@ int solution1(int k, vector<int> tangerine) {
         
     return answer;
 }
+
+
+// --------------------
+// 2. vector의 인덱스를 이용하여 map을 대체한 풀이
+// vector의 인덱스를 map에서의 크기(key)로 사용한다는 발상이 좋아 참고함
+// 최악의 상황일 때 시간과 공간을 많이 사용하는 경향이 있음
+// tangerine 벡터를 2번 방문한다는 점과, 
+// 존재하지 않는 크기에 대한 공간까지 할당하기 때문인 것으로 추정
+int solution2(int k, vector<int> tangerine) {
+    int answer = 0;
+    int numTotalBox = 0;
+    int numMaxSize = *max_element(tangerine.begin(), tangerine.end());
+    vector<int> vecSizeCount(numMaxSize, 0);
+    
+    for ( const auto &size : tangerine )
+    {
+        ++vecSizeCount[size - 1];
+    }
+    
+    stable_sort(vecSizeCount.begin(), vecSizeCount.end(), greater<int>());
+    
+    for ( const auto &size : vecSizeCount )
+    {
+        numTotalBox += size;
+        ++answer;
+        if ( numTotalBox >= k ) { break; }
+    }
+    
+    return answer;
+}
