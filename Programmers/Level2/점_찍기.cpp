@@ -1,3 +1,7 @@
+#include <cmath>
+
+using namespace std;
+
 // 정수 연산만을 이용한 방법
 long long solution1(int k, int d) {
     long long answer = 0;
@@ -17,6 +21,20 @@ long long solution1(int k, int d) {
                 break;
             }
         }
+    }
+
+    return answer;
+}
+
+// sqrt 연산을 이용한 방법
+long long solution2(int k, int d) {
+    long long answer = 0;
+    long long maxDistance = (long long)d * d;
+    
+    for (int posX = 0; posX <= d; posX += k)
+    {
+        int posY = sqrt( maxDistance - (long long)posX * posX );
+        answer += posY / k + 1;
     }
 
     return answer;
