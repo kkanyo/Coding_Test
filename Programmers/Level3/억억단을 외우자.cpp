@@ -2,8 +2,6 @@
 
 using namespace std;
 
-// 1을 제외한 모든 수는 최소 2번 등장
-// 1을 제외한 소수는 2번만 등장
 // 약수의 개수만큼 등장한다
 // 4: 1, 2, 4
 // 6: 1, 2, 3, 6
@@ -11,36 +9,38 @@ using namespace std;
 // 16: 1, 2, 4, 8, 16
 
 // 1차 결과: 시간 초과
+// 2차 결과: 시간 초과 (약수의 개수 산정 문제 해결)
 
 vector<int> solution(int e, vector<int> starts) {
     vector<int> answer;
     int minStart = *min_element(starts.begin(), starts.end());
-    vector<int> vecAppearCount(e, 0);
+    vector<int> vecCountDiv(e, 0);
     
-    // 약수를 구하는 계산이 너무 느림
-    for ( int i = minStart; i <= e; i++ )
-    {        
-        for (int j = 1; j * j <= i; j++) 
+    for ( int i = 1; i <= e; i++)
+    {
+        for ( int j = 1; j <= e / i; j++)
         {
-            if (i % j == 0) {
-                vecAppearCount[i - 1]++;
-                if (j * j < i) {
-                    vecAppearCount[i - 1]++;
-                }
-            }
+            ++vecCountDiv[i * j - 1];
         }
     }
     
-    for ( const auto& num : starts )
-    {
-        if ( num == e ) { answer.push_back(num); }
-        else
+    // 최대 등장 수를 구하는 과정에서 너무 오래 걸림
+    int prevStart = e + 1;
+    int divMaxAppear = 0;
+    for ( const auto& start : starts )
+    {        
+        // 1. 범위가 늘어나면 재탐색
+        // 2. 범위가 줄어들고, 이전 최대 등장 수가 범위 밖인 경우 재탐색
+        if ( prevStart > start 
+            || ( !answer.empty() && prevStart < start && answer.back() < start ) )
         {
-            // vecAppearCount의 크기가 커지면 탐색 시간이 오래 걸림
-            answer.push_back( distance( vecAppearCount.begin(), 
-                                   max_element( vecAppearCount.begin() + num - 1, vecAppearCount.end() ) ) + 1 );
+            divMaxAppear = distance( vecCountDiv.begin(), 
+                                    max_element( vecCountDiv.begin() + start, vecCountDiv.end() ) );
+
         }
-        
+        prevStart = start;
+
+        answer.push_back( divMaxAppear );
     }
     
     return answer;
